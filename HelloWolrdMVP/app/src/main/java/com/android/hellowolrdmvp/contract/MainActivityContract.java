@@ -11,6 +11,7 @@ public interface MainActivityContract {
     void initView();
 
     void setViewData(String data);
+
   }
 
   interface Model {
@@ -20,6 +21,7 @@ public interface MainActivityContract {
 
   interface Presenter {
 
-    void onClick(android.view.View view);
+    void onClickOne(android.view.View view);
+    void onClickTwo(android.view.View view);
   }
 }

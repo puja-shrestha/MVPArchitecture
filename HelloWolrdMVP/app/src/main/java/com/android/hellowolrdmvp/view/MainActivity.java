@@ -1,5 +1,6 @@
 package com.android.hellowolrdmvp.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View.OnClickListener;
@@ -13,7 +14,7 @@ import com.android.hellowolrdmvp.presenter.MainActivityPresenter;
 public class MainActivity extends AppCompatActivity implements View {
 
   private TextView mTextView;
-  private Button mButton;
+  private Button mButton, button_two;
   private Presenter mPresenter;
 
   @Override
@@ -21,19 +22,47 @@ public class MainActivity extends AppCompatActivity implements View {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    mPresenter = new MainActivityPresenter(this);
+    //instance of the presenter
+    mPresenter = new MainActivityPresenter(this,getApplicationContext());
   }
+//
+//  @Override
+//  public void initView() {
+//    mTextView = (TextView) findViewById(R.id.textView);
+//    mButton = (Button) findViewById(R.id.button);
+//    mButton.setOnClickListener(new OnClickListener() {
+//      @Override
+//      public void onClick(android.view.View view) {
+//        mPresenter.onClick(view);
+//      }
+//    });
+//  }
+//
+//  @Override
+//  public void setViewData(String data) {
+//    mTextView.setText(data);
+//  }
 
   @Override
-  public void initView() {
+  public void initView(){
     mTextView = (TextView) findViewById(R.id.textView);
-    mButton = (Button) findViewById(R.id.button);
+    mButton = (Button)findViewById(R.id.button);
     mButton.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(android.view.View view) {
-        mPresenter.onClick(view);
+          mPresenter.onClickOne(view);
       }
     });
+
+    button_two =(Button)findViewById(R.id.button_two);
+      button_two.setOnClickListener(new OnClickListener() {
+          @Override
+          public void onClick(android.view.View view) {
+              mPresenter.onClickTwo(view);
+              Intent i = new Intent(getApplicationContext(), NextActivity.class);
+              startActivity(i);
+          }
+      });
   }
 
   @Override
